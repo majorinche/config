@@ -36,12 +36,21 @@ autopart --type=lvm
 kexec-tools
 vim
 net-tools
+ntp
 %end
 
 %addon com_redhat_kdump --enable --reserve-mb='auto'
 
 %end
 
+%post --interpreter=/bin/bash
+rm -rf /etc/yum.repos.d/*
+echo '[iso]
+name=iso
+baseurl=http://172.16.25.213/src/redhat73/
+enabled=1
+gpgcheck=0' > /etc/yum.repos.d/iso.repo
+%end
 
 %post --interpreter=/bin/bash
 echo 'DEVICE=enp2s0f0
