@@ -1,0 +1,59 @@
+url --url="http://192.168.242.213/src/ubuntu1604"
+
+#System language
+lang en_US
+
+#Language modules to install
+langsupport en_US
+
+#System keyboard
+keyboard us
+
+#System mouse
+mouse
+
+#System timezone
+timezone Asia/Shanghai
+
+#Initial user (user with sudo capabilities)
+user ubuntu --fullname "ubuntu" --password "ubuntu"
+
+#Reboot after installation
+reboot
+
+#Use text mode install
+text
+
+#Install OS instead of upgrade
+install
+
+#System bootloader configuration
+bootloader --location=mbr
+
+#Clear the Master Boot Record
+zerombr yes
+
+# `--all` will give message in install log about only clearing first drive but
+# this is still needed
+clearpart --all --initlabel
+
+part /boot --fstype=ext4 --size=512 --asprimary
+volgroup vg0 pv.1
+logvol / --fstype=ext4 --name=root --vgname=vg0 --size=100000
+logvol swap --name=swap --vgname=vg0 --size=2048 --maxsize=16000
+
+#System authorization infomation
+auth --useshadow
+
+#Network information
+network --bootproto=dhcp --device=eno1
+
+#Do not configure the X Window System
+skipx
+
+%packages
+wget
+man
+openssh-server
+curl
+vim
