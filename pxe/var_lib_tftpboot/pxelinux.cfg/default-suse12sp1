@@ -1,0 +1,4 @@
+default linux
+lable linux
+kernel linux
+append initrd=initrd autoyast=ftp://172.16.24.230/autoinst.xml install=http://172.16.24.213/src/suse12sp1/ splash=verbose showopts
